@@ -96,15 +96,14 @@ class MyGame extends FlameGame with SingleGameInstance, TapDetector {
         ),
       );
 
-      add(
-        SpriteAnimationComponent(
-          animation: animation,
-        )
-          ..position.y = size.y / 2
-          ..position.x = 100
-          ..anchor = Anchor.center
-          ..size = Vector2.all(100),
+      final chopper = SpriteAnimationComponent(
+        animation: animation,
+        position: Vector2(100, size.y / 2),
+        size: Vector2.all(100),
+        anchor: Anchor.center,
       );
+
+      add(chopper);
     }
   }
 
