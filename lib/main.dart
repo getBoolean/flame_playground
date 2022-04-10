@@ -13,18 +13,40 @@ void main() {
   }
   final myGame = MyGame()..paused = true;
   runApp(
-    GameWidget(
-      game: myGame,
-      overlayBuilderMap: const {
-        pauseOverlayIdentifier: _pauseMenuBuilder,
-        controlsOverlayIdentifier: _controlsOverlayBuilder,
-      },
-      initialActiveOverlays: const [
-        pauseOverlayIdentifier,
-        controlsOverlayIdentifier,
-      ],
+    GameBackgroundWidget(
+      child: GameWidget(
+        game: myGame,
+        overlayBuilderMap: const {
+          pauseOverlayIdentifier: _pauseMenuBuilder,
+          controlsOverlayIdentifier: _controlsOverlayBuilder,
+        },
+        initialActiveOverlays: const [
+          pauseOverlayIdentifier,
+          controlsOverlayIdentifier,
+        ],
+      ),
     ),
   );
+}
+
+class GameBackgroundWidget extends StatelessWidget {
+  final Widget child;
+
+  const GameBackgroundWidget({Key? key, required this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Flame Playground',
+      home: Scaffold(
+        body: Container(
+          color: Colors.amber,
+          child: child,
+        ),
+      ),
+    );
+  }
 }
 
 Widget _controlsOverlayBuilder(BuildContext buildContext, MyGame game) {
